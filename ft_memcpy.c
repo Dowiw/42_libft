@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 19:09:49 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/13 19:09:50 by kmonjard         ###   ########.fr       */
+/*   Created: 2025/05/13 19:38:41 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/13 19:38:42 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Set memory area to '\0' based on size n
-void	ft_bzero(void *s, size_t n)
+//Copies a mem_area src to another mem_area dest based on size
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
-	unsigned char	*mem_area;
+	unsigned char	*src_area;
+	unsigned char	*dest_area;
 
 	i = 0;
-	mem_area = (unsigned char *) s;
+	if (src == NULL && dest == NULL)
+		return (dest);
+	src_area = (unsigned char *) src;
+	dest_area = (unsigned char *) dest;
 	while (i < n)
 	{
-		mem_area[i] = '\0';
+		dest_area[i] = src_area[i];
 		i++;
 	}
+	return (dest);
 }

@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 19:09:49 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/13 19:09:50 by kmonjard         ###   ########.fr       */
+/*   Created: 2025/05/13 20:08:31 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/13 20:08:32 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Set memory area to '\0' based on size n
-void	ft_bzero(void *s, size_t n)
+//Like memcpy: HOWEVER, copies src to another array then copies it to dest
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t			i;
-	unsigned char	*mem_area;
+	unsigned char	*dest_area;
+	unsigned char	*src_area;
+	unsigned char	*temp;
 
 	i = 0;
-	mem_area = (unsigned char *) s;
+	if (dest == NULL && src == NULL)
+		return (dest);
+	dest_area = (unsigned char *) dest;
+	src_area = (unsigned char *) src;
 	while (i < n)
 	{
-		mem_area[i] = '\0';
+		temp[i] = src_area[i];
 		i++;
 	}
+	i = 0;
+	while (i < n)
+	{
+		dest_area[i] = temp[i];
+		i++;
+	}
+	return (dest);
 }

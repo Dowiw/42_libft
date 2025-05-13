@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 12:35:34 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/13 12:56:31 by kmonjard         ###   ########.fr       */
+/*   Created: 2025/05/12 22:50:04 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/12 22:50:06 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+//Returns length of string (char *)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
