@@ -13,12 +13,12 @@ I made this just for my tracking, maybe work a little outside **42 Berlin** and 
 - ft_isascii done
 - ft_isprint done
 - ft_strlen done
-- ft_memset
-- ft_bzero
-- ft_memcpy
-- ft_memmove
-- ft_strlcpy
-- ft_strlcat
+- ft_memset done
+- ft_bzero done
+- ft_memcpy done
+- ft_memmove done
+- ft_strlcpy done
+- ft_strlcat done
 - ft_toupper
 - ft_tolower
 - ft_strchr
