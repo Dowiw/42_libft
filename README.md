@@ -6,6 +6,9 @@ Compile a static library that can be used throughout the cursus.
 
 I made this just for my tracking, maybe work a little outside **42 Berlin** and for memories 😁
 
+Made with C and motivation,
+kmonjard
+
 # MANDARTORY
 - ft_isalpha done
 - ft_isdigit done
@@ -55,7 +58,3 @@ with malloc:
 - ft_lstclear
 - ft_lstiter
 - ft_lstmap
-
-
-Made with C and motivation,
-kmonjard
