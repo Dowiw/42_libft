@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:43:36 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:37 by kmonjard         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:11:53 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//Just a test push, for some reason my username and email is reset when I reopen and repush from WSL (no shutdown)
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
