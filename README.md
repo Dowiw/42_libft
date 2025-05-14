@@ -1,10 +1,10 @@
 ## 42_libft
 
-# DESCRIPTION
 This is the first project you will do as a 42 student.
 Compile a static library that can be used throughout the cursus.
 
-I made this just for my tracking, maybe work a little outside **42 Berlin** and for memories 😁
+I made this just for my tracking, maybe work a little outside
+**42 Berlin** during my long rides in the S-Bahn and for memories 😁
 
 Made with C and motivation,
 kmonjard
