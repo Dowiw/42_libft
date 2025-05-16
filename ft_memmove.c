@@ -15,26 +15,24 @@
 //Like memcpy: HOWEVER, copies src to another array then copies it to dest
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t			i;
 	unsigned char	*dest_area;
 	unsigned char	*src_area;
-	unsigned char	*temp;
 
-	i = 0;
 	if (dest == NULL && src == NULL)
 		return (dest);
 	dest_area = (unsigned char *) dest;
 	src_area = (unsigned char *) src;
-	while (i < n)
+	if (dest_area < src_area)
 	{
-		temp[i] = src_area[i];
-		i++;
+		while (n--)
+			*dest_area++ = *src_area++;
 	}
-	i = 0;
-	while (i < n)
+	else if (dest_area > src_area)
 	{
-		dest_area[i] = temp[i];
-		i++;
+		dest_area += n;
+		src_area += n;
+		while (n--)
+			*dest_area-- = *src_area--;
 	}
 	return (dest);
 }
