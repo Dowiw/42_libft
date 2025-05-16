@@ -13,7 +13,7 @@
 #include "libft.h"
 
 //Concats src to dest based on size: returns dst_len + src_len
-size_t	ft_strlcat(char *dst, char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	space;
