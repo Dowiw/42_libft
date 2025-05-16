@@ -11,18 +11,17 @@
 # **************************************************************************** #
 
 NAME = libft.a
-SRC_DIR = srcs/ft_putchar.c srcs/ft_putstr.c srcs/ft_strcmp.c srcs/ft_strlen.c srcs/ft_swap.c
-INC_DIR = includes
+
+C_FILES = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isprint.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Werror -Wextra -c $(SRC_DIR) -I$(INC_DIR)
+	gcc -Wall -Werror -Wextra -c $(C_FILES)
 	ar rc $(NAME) *.o
 
 clean:
 	rm -f *.o
-	rm -f $(INC_DIR)*.*.gch
 
 fclean: clean
 	rm -f $(NAME)
