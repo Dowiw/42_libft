@@ -13,7 +13,7 @@
 #include "libft.h"
 
 //Find char c in string s: return last found address, NULL otherwise
-char	*strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	char *out;
 
