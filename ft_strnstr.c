@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:41:44 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/16 17:41:45 by kmonjard         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:42:21 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,24 @@
 //Look for string little in string big: return NULL if N/A, else &big
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char	*little_mark;
+	size_t	i;
+	size_t	j;
 
-	little_mark = NULL;
-	if (*little == '\0')
+	i = 0;
+	if (!big && !len)
+		return (NULL);
+	if (little[0] == '\0')
 		return ((char *)big);
-	while (len > 0)
+	while (i < len)
 	{
-		if (*little == *big)
+		j = 0;
+		while (big[i + j] == little[j] && (i + j) < len)
 		{
-			little_mark = (char *)little;
-			while (*little_mark == *big)
-			{
-				little_mark++;
-				big++;
-			}
-			if (*little_mark == '\0')
-			{
-				return ((char *)big);
-			}
+			j++;
+			if (little[j] == '\0')
+				return ((char *)(big + i));
 		}
-		little++;
-		big++;
-		len--;
+		i++;
 	}
-	return (little_mark);
-}
-
-int main() {
-	#include <string.h>
-	#include <stdio.h>
-	char *a = "helohellohelo";
-	char *needle = "ell";
-	printf("%s", ft_strnstr(a, needle, 5));
+	return (NULL);
 }
