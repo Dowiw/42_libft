@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-//Like memcpy: HOWEVER, copies src to another array then copies it to dest
+//Like memcpy: HOWEVER, copies src to dest considering overlaps
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char	*dest_area;
@@ -20,8 +20,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	if (dest == NULL && src == NULL)
 		return (dest);
-	dest_area = (unsigned char *) dest;
-	src_area = (unsigned char *) src;
+	dest_area = (unsigned char *)dest;
+	src_area = (unsigned char *)src;
 	if (dest_area < src_area)
 	{
 		while (n--)
