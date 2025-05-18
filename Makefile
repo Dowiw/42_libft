@@ -13,16 +13,18 @@
 NAME = libft.a
 
 #Alt + Z to wrap a line for readability in VSC
-C_FILES = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isprint.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_tolower.c ft_toupper.c
+C_FILES = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isprint.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c
+
+O_FILES = $(C_FILES:.c=.o)
 
 all: $(NAME)
 
 $(NAME):
 	gcc -Wall -Werror -Wextra -c $(C_FILES)
-	ar rc $(NAME) *.o
+	ar rc $(NAME) $(O_FILES)
 
 clean:
-	rm -f *.o
+	rm -f $(O_FILES)
 
 fclean: clean
 	rm -f $(NAME)
