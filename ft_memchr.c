@@ -15,15 +15,16 @@
 //Find c in mem_area s based on size n
 void	*ft_memchr(const void *s, int c, size_t n)
 {
+	size_t			i;
 	unsigned char	*s_area;
 
+	i = 0;
 	s_area = (unsigned char *)s;
-	while (n > 0)
+	while (i < n)
 	{
-		if (*s_area == (unsigned char)c)
-			return (s_area);
-		s_area++;
-		n--;
+		if (s_area[i] == (unsigned char)c)
+			return (s_area + i);
+		i++;
 	}
 	return (NULL);
 }
