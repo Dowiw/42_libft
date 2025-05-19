@@ -1,14 +1,15 @@
 #include "libft.h"
 #include <assert.h>
-#include <stdio.h>
-#include <limits.h>
-#include <strings.h>
-#include <string.h>
+#include <stdio.h> //Printing
+#include <limits.h> //Mins and Maxes
+#include <strings.h> //String functions
+#include <string.h> //More string functions
+#include <ctype.h> //Type checking
 
 void	atoi_tester(void);
 void	bzero_tester(void);
 void	calloc_tester(void);
-void	memcmp_tester(void);
+void	isalnum_tester(void);
 void	isalpha_tester(void);
 
 void	isascii_tester(void);
@@ -37,6 +38,12 @@ int main(void)
 	//testing happens from A to Z
 	atoi_tester();
 	bzero_tester();
+	calloc_tester();
+	isalnum_tester();
+	isalpha_tester();
+	isascii_tester();
+	isdigit_tester();
+	isprint_tester();
 	return (0);
 }
 
@@ -155,32 +162,177 @@ void	bzero_tester(void)
 void	calloc_tester(void)
 {
 	printf("Testing ft_calloc against calloc...  \n");
+	//Zero elements
+	void *sys_zero_elem = calloc(0, sizeof(int));
+	void *ft_zero_elem  = ft_calloc(0, sizeof(int));
+	assert((sys_zero_elem == NULL && ft_zero_elem == NULL) || (sys_zero_elem != NULL && ft_zero_elem != NULL));
+	free(sys_zero_elem);
+	free(ft_zero_elem);
 
-	printf("You're calloc works!");
+	//Zero size
+	void *sys_zero_size = calloc(10, 0);
+	void *ft_zero_size  = ft_calloc(10, 0);
+	assert((sys_zero_size == NULL && ft_zero_size == NULL) || (sys_zero_size != NULL && ft_zero_size != NULL));
+	free(sys_zero_size);
+	free(ft_zero_size);
+
+	//Regular allocation
+	size_t n = 20;
+	sys_zero_elem = calloc(n, sizeof(int));
+	ft_zero_elem  = ft_calloc(n, sizeof(int));
+	assert((sys_zero_elem == NULL && ft_zero_elem == NULL) || (sys_zero_elem != NULL && ft_zero_elem != NULL));
+	if (sys_zero_elem && ft_zero_elem) {
+		assert(memcmp(sys_zero_elem, ft_zero_elem, n * sizeof(int)) == 0);
+	}
+	free(sys_zero_elem);
+	free(ft_zero_elem);
+
+	//Integer overflow (return NULL)
+	size_t huge = SIZE_MAX / 2 + 1;
+	sys_zero_elem = calloc(huge, 2);
+	ft_zero_elem  = ft_calloc(huge, 2);
+	assert((sys_zero_elem == NULL && ft_zero_elem == NULL) || (sys_zero_elem != NULL && ft_zero_elem != NULL));
+	free(sys_zero_elem);
+	free(ft_zero_elem);
+
+	//Alignment check (ensure no crash)
+	sys_zero_elem = calloc(4, sizeof(double));
+	ft_zero_elem  = ft_calloc(4, sizeof(double));
+	assert((sys_zero_elem == NULL && ft_zero_elem == NULL) || (sys_zero_elem != NULL && ft_zero_elem != NULL));
+	free(sys_zero_elem);
+	free(ft_zero_elem);
+	printf("You're calloc works!\n");
 }
 
 void	isalnum_tester(void)
 {
 	printf("Testing ft_isalnum against isalnum...  \n");
-	printf("You're isalnum works!");
+
+	//isalnum is so weird for return 8
+	//Alphabets && Numbers
+	assert((ft_isalnum('0') && isalnum('0')) != 0);
+	assert((ft_isalnum('9') && isalnum('9')) != 0);
+	assert((ft_isalnum('a') && isalnum('a')) != 0);
+	assert((ft_isalnum('z') && isalnum('z')) != 0);
+	assert((ft_isalnum('A') && isalnum('A')) != 0);
+	assert((ft_isalnum('Z') && isalnum('Z')) != 0);
+
+	//Middle
+	assert((ft_isalnum('j') && isalnum('j')) != 0);
+	assert((ft_isalnum('K') && isalnum('K')) != 0);
+	assert((ft_isalnum('5') && isalnum('5')) != 0);
+
+	//Space
+	assert((ft_isalnum(' ') && isalnum(' ')) == 0);
+	assert((ft_isalnum('\n') && isalnum('\n')) == 0);
+	assert((ft_isalnum('\r') && isalnum('\r')) == 0);
+
+	//Null
+	assert((ft_isalnum('\0') && isalnum('\0')) == 0);
+	printf("You're isalnum works!\n");
 }
 
 void	isalpha_tester(void)
 {
 	printf("Testing ft_isalpha against isalpha...  \n");
-	printf("You're isalpha works!");
+
+	//Alphabets
+	assert((ft_isalpha('a') && isalpha('a')) != 0);
+	assert((ft_isalpha('A') && isalpha('A')) != 0);
+	assert((ft_isalpha('z') && isalpha('z')) != 0);
+	assert((ft_isalpha('Z') && isalpha('Z')) != 0);
+	assert((ft_isalpha('M') && isalpha('M')) != 0);
+	assert((ft_isalpha('n') && isalpha('n')) != 0);
+
+	//Non-alphabets
+	assert((ft_isalpha('1') && isalpha('1')) == 0);
+	assert((ft_isalpha('>') && isalpha('>')) == 0);
+	assert((ft_isalpha('?') && isalpha('?')) == 0);
+
+	//Space
+	assert((ft_isalpha(' ') && isalpha(' ')) == 0);
+	assert((ft_isalpha('\n') && isalpha('\n')) == 0);
+	assert((ft_isalpha('\r') && isalpha('\r')) == 0);
+
+	//Null
+	assert((ft_isalpha('\0') && isalpha('\0')) == 0);
+
+	printf("You're isalpha works!\n");
 }
 
 void	isascii_tester(void)
 {
 	printf("Testing ft_isascii against isascii...  \n");
-	printf("You're isascii works!");
+
+	//Alphabets
+	assert((ft_isascii('a') && isascii('a')) != 0);
+	assert((ft_isascii('A') && isascii('A')) != 0);
+	assert((ft_isascii('z') && isascii('z')) != 0);
+	assert((ft_isascii('Z') && isascii('Z')) != 0);
+	assert((ft_isascii('M') && isascii('M')) != 0);
+	assert((ft_isascii('n') && isascii('n')) != 0);
+
+	//Non-alphabets
+	assert((ft_isascii('1') && isascii('1')) != 0);
+	assert((ft_isascii('>') && isascii('>')) != 0);
+	assert((ft_isascii('?') && isascii('?')) != 0);
+
+	//Edge-cases
+	assert((ft_isascii('\0') && isascii('\0')) != 0);
+	assert((ft_isascii('\177') && isascii('\177')) != 0); //DEL char in octal
+
+	//Space
+	assert((ft_isascii(' ') && isascii(' ')) != 0);
+	assert((ft_isascii('\n') && isascii('\n')) != 0);
+	assert((ft_isascii('\r') && isascii('\r')) != 0);
+
+	//Outside ascii
+	assert((ft_isascii(-1) && isascii(-1)) == 0);
+	assert((ft_isascii(128) && isascii(128)) == 0);
+	assert((ft_isascii(INT_MIN) && isascii(INT_MIN)) == 0);
+	assert((ft_isascii(INT_MAX) && isascii(INT_MAX)) == 0);
+
+	printf("You're isascii works!\n");
 }
 
 void	isdigit_tester(void)
 {
 	printf("Testing ft_isdigit against isdigit...  \n");
-	printf("You're isdigit works!");
+
+	//Numbers
+	assert((ft_isdigit('0') && isdigit('0')) != 0);
+	assert((ft_isdigit('9') && isdigit('9')) != 0);
+	assert((ft_isdigit('5') && isdigit('5')) != 0);
+	assert((ft_isdigit('3') && isdigit('3')) != 0);
+	assert((ft_isdigit('7') && isdigit('7')) != 0);
+
+	//Alphabets
+	assert((ft_isdigit('a') && isdigit('a')) == 0);
+	assert((ft_isdigit('A') && isdigit('A')) == 0);
+	assert((ft_isdigit('z') && isdigit('z')) == 0);
+	assert((ft_isdigit('Z') && isdigit('Z')) == 0);
+	assert((ft_isdigit('M') && isdigit('M')) == 0);
+	assert((ft_isdigit('n') && isdigit('n')) == 0);
+
+	//Non-alphabets
+	assert((ft_isdigit('>') && isdigit('>')) == 0);
+	assert((ft_isdigit('?') && isdigit('?')) == 0);
+
+	//Space
+	assert((ft_isdigit(' ') && isdigit(' ')) == 0);
+	assert((ft_isdigit('\n') && isdigit('\n')) == 0);
+	assert((ft_isdigit('\r') && isdigit('\r')) == 0);
+
+	//Null
+	assert((ft_isdigit('\0') && isdigit('\0')) == 0);
+
+	//Outside ascii
+	assert((ft_isdigit(-1) && isdigit(-1)) == 0);
+	assert((ft_isdigit(128) && isdigit(128)) == 0);
+	assert((ft_isdigit(INT_MIN) && isdigit(INT_MIN)) == 0);
+	assert((ft_isdigit(INT_MAX) && isdigit(INT_MAX)) == 0);
+
+	printf("You're isdigit works!\n");
 }
 
 void	isprint_tester(void)
