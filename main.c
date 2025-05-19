@@ -5,6 +5,7 @@
 #include <strings.h> //String functions
 #include <string.h> //More string functions
 #include <ctype.h> //Type checking
+#include <bsd/string.h> // strlcat, bzero, strlcpy
 
 void	atoi_tester(void);
 void	bzero_tester(void);
@@ -57,9 +58,11 @@ int main(void)
 	memset_tester();
 	strchr_tester();
 	strdup_tester();
+
+	//For compilation, must use -lbsd
 	strlcat_tester();
 	strlcpy_tester();
-	strlen_tester();
+
 	strncmp_tester();
 	strnstr_tester();
 	strrchr_tester();
@@ -588,7 +591,7 @@ void	memcpy_tester(void)
 	printf("You're memcpy works!\n");
 }
 
-void memmove_tester(void)
+void	memmove_tester(void)
 {
 	printf("Testing ft_memmove against memmove...\n");
 
@@ -649,7 +652,7 @@ void memmove_tester(void)
 	printf("You're memmove works!\n");
 }
 
-void memset_tester(void)
+void	memset_tester(void)
 {
 	printf("Testing ft_memset against memset...\n");
 
@@ -693,7 +696,7 @@ void memset_tester(void)
 	printf("You're memset works!\n");
 }
 
-void strchr_tester(void)
+void	strchr_tester(void)
 {
 	printf("Testing ft_strchr against strchr...\n");
 
@@ -752,7 +755,7 @@ void strchr_tester(void)
 	printf("You're strchr works!\n");
 }
 
-void strdup_tester(void)
+void	strdup_tester(void)
 {
 	printf("Testing ft_strdup against strdup...\n");
 
@@ -793,48 +796,188 @@ void strdup_tester(void)
 
 void	strlcat_tester(void)
 {
-	printf("Testing ft_strlcat against strlcat...  \n");
-	printf("You're strlcat works!");
+	printf("Testing ft_strlcat against strlcat...\n");
+
+	char dst1[20], dst2[20];
+	char src[] = "World";
+
+	strcpy(dst1, "Hello ");
+	strcpy(dst2, "Hello ");
+
+	//regular stuff
+	size_t out1 = ft_strlcat(dst1, src, sizeof(dst1));
+	size_t out2 = strlcat(dst2, src, sizeof(dst2));
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	//n is too small: no concatenation
+	strcpy(dst1, "Hello ");
+	strcpy(dst2, "Hello ");
+
+	out1 = ft_strlcat(dst1, src, 3);
+	out2 = strlcat(dst2, src, 3);
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	//concatenate to empty string
+	dst1[0] = 0;
+	dst2[0] = 0;
+	out1 = ft_strlcat(dst1, src, sizeof(dst1));
+	out2 = strlcat(dst2, src, sizeof(dst2));
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	//src is empty
+	strcpy(dst1, "Hello ");
+	strcpy(dst2, "Hello ");
+	out1 = ft_strlcat(dst1, "", sizeof(dst1));
+	out2 = strlcat(dst2, "", sizeof(dst2));
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	printf("You're strlcat works!\n");
 }
 
 void	strlcpy_tester(void)
 {
-	printf("Testing ft_strlcpy against strlcpy...  \n");
-	printf("You're strlcpy works!");
+	printf("Testing ft_strlcpy against strlcpy...\n");
+
+	char dst1[20], dst2[20];
+	char src[] = "Hello World";
+	size_t out1 = ft_strlcpy(dst1, src, sizeof(dst1));
+	size_t out2 = strlcpy(dst2, src, sizeof(dst2));
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	//n less than src length
+	out1 = ft_strlcpy(dst1, src, 5);
+	out2 = strlcpy(dst2, src, 5);
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	//n is 0
+	out1 = ft_strlcpy(dst1, src, 0);
+	out2 = strlcpy(dst2, src, 0);
+	assert(out1 == out2);
+
+	//src is empty
+	out1 = ft_strlcpy(dst1, "", sizeof(dst1));
+	out2 = strlcpy(dst2, "", sizeof(dst2));
+	assert(out1 == out2 && strcmp(dst1, dst2) == 0);
+
+	printf("You're strlcpy works!\n");
 }
 
 void	strlen_tester(void)
 {
-	printf("Testing ft_strlen against strlen...  \n");
-	printf("You're strlen works!");
+	printf("Testing ft_strlen against strlen...\n");
+
+	char s1[] = "Hello World";
+	assert(ft_strlen(s1) == strlen(s1));
+
+	char s2[] = "";
+	assert(ft_strlen(s2) == strlen(s2));
+
+	char s3[] = "abc\0def";
+	assert(ft_strlen(s3) == strlen(s3));
+
+	char s4[] = "a";
+	assert(ft_strlen(s4) == strlen(s4));
+
+	printf("You're strlen works!\n");
 }
 
 void	strncmp_tester(void)
 {
-	printf("Testing ft_strncmp against strncmp...  \n");
-	printf("You're strncmp works!");
+	printf("Testing ft_strncmp against strncmp...\n");
+
+	char s1[] = "Hello World";
+	char s2[] = "Hello World";
+	assert(ft_strncmp(s1, s2, 20) == strncmp(s1, s2, 20));
+
+	char s3[] = "Hello";
+	char s4[] = "Hella";
+	assert(ft_strncmp(s3, s4, 5) == strncmp(s3, s4, 5));
+
+	//n less than difference
+	assert(ft_strncmp(s3, s4, 2) == strncmp(s3, s4, 2));
+
+	//n is 0
+	assert(ft_strncmp(s3, s4, 0) == strncmp(s3, s4, 0));
+
+	char s5[] = "";
+	char s6[] = "Hello";
+	assert(ft_strncmp(s5, s6, 2) == strncmp(s5, s6, 2));
+
+	printf("You're strncmp works!\n");
 }
 
 void	strnstr_tester(void)
 {
-	printf("Testing ft_strnstr against strnstr...  \n");
-	printf("You're strnstr works!");
+	printf("Testing ft_strnstr against strnstr...\n");
+
+	char s1[] = "Hello World";
+
+	char *out1 = ft_strnstr(s1, "World", 11);
+	char *out2 = strnstr(s1, "World", 11);
+	assert(out1 == out2);
+
+	//needle not found
+	out1 = ft_strnstr(s1, "Earth", 11);
+	out2 = strnstr(s1, "Earth", 11);
+	assert(out1 == out2);
+
+	//empty needle
+	out1 = ft_strnstr(s1, "", 11);
+	out2 = strnstr(s1, "", 11);
+	assert(out1 == out2);
+
+	//n less than where needle appears
+	out1 = ft_strnstr(s1, "World", 5);
+	out2 = strnstr(s1, "World", 5);
+	assert(out1 == out2);
+
+	printf("You're strnstr works!\n");
 }
 
 void	strrchr_tester(void)
 {
-	printf("Testing ft_strrchr against strrchr...  \n");
-	printf("You're strrchr works!");
+	printf("Testing ft_strrchr against strrchr...\n");
+
+	char s1[] = "Hello World";
+	char find = 'l';
+	char *out1 = ft_strrchr(s1, find);
+	char *out2 = strrchr(s1, find);
+	assert(out1 == out2);
+
+	//find not found
+	find = 'x';
+	out1 = ft_strrchr(s1, find);
+	out2 = strrchr(s1, find);
+	assert(out1 == out2);
+
+	//find null terminator
+	find = '\0';
+	out1 = ft_strrchr(s1, find);
+	out2 = strrchr(s1, find);
+	assert(out1 == out2);
+
+	//single char string
+	char s2[] = "a";
+	find = 'a';
+	out1 = ft_strrchr(s2, find);
+	out2 = strrchr(s2, find);
+	assert(out1 == out2);
+
+	printf("You're strrchr works!\n");
 }
 
 void	tolower_tester(void)
 {
-	printf("Testing ft_tolower against tolower...  \n");
-	printf("You're tolower works!");
+	printf("Testing ft_tolower against tolower...\n");
+	for (int c = 0; c < 300; ++c)
+		assert(ft_tolower(c) == tolower(c));
+	printf("You're tolower works!\n");
 }
 
 void	toupper_tester(void)
 {
-	printf("Testing ft_toupper against toupper...  \n");
-	printf("You're toupper works!");
+	printf("Testing ft_toupper against toupper...\n");
+	for (int c = 0; c < 300; ++c)
+		assert(ft_toupper(c) == toupper(c));
+	printf("You're toupper works!\n");
 }
