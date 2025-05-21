@@ -22,19 +22,19 @@ kmonjard
 - ft_memmove done
 - ft_strlcpy done
 - ft_strlcat done
-- ft_toupper
-- ft_tolower
-- ft_strchr
-- ft_strrchr
-- ft_strncmp
-- ft_memchr
-- ft_memcmp
-- ft_strnstr
-- ft_atoi
+- ft_toupper done
+- ft_tolower done
+- ft_strchr done
+- ft_strrchr done
+- ft_strncmp done
+- ft_memchr done
+- ft_memcmp done
+- ft_strnstr done
+- ft_atoi done
 
 with malloc:
-- ft_calloc
-- ft_strdup
+- ft_calloc done
+- ft_strdup done
 
 # ADDITIONAL FUNCTIONS
 - ft_substr
