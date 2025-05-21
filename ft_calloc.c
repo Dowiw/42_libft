@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-//Same as malloc, checks for int overflow of system using SIZE_MAX,
+//Allocate nmemb elements of size bytes to 0, should check overflow
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void			*out;
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	unsigned char	*setter;
 
 	i = 0;
-	if (size != 0 && nmemb > __SIZE_MAX__ / size)
+	if (size != 0 && nmemb > SIZE_MAX / size)
 		return (NULL);
 	total = nmemb * size;
 	out = malloc(total);
