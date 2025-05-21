@@ -413,15 +413,15 @@ void	memchr_tester(void)
 	//Look for Null Case
 	char s2[] = "Hello \0World";
 	char find2 = '\0';
-	char *out3 = ft_memchr(s2, find, sizeof(s2));
-	char *out4 = memchr(s2, find, sizeof(s2));
+	char *out3 = ft_memchr(s2, find2, sizeof(s2));
+	char *out4 = memchr(s2, find2, sizeof(s2));
 	assert(*out3 == *out4); //Should return '\0'
 
 	//Look for ' '
 	char s3[] = "Hello World";
 	char find3 = ' ';
-	char *out5 = ft_memchr(s3, find, sizeof(s3));
-	char *out6 = memchr(s3, find, sizeof(s3));
+	char *out5 = ft_memchr(s3, find3, sizeof(s3));
+	char *out6 = memchr(s3, find3, sizeof(s3));
 	assert(*out5 == *out6); //Should return ' '
 
 	//Not found
