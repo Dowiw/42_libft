@@ -19,10 +19,10 @@ void	*ft_memset(void *s, int c, size_t n)
 	unsigned char	*mem_area;
 
 	i = 0;
-	mem_area = (unsigned char *) s;
+	mem_area = (unsigned char *)s;
 	while (i < n)
 	{
-		mem_area[i] = (unsigned char) c;
+		mem_area[i] = (unsigned char)c;
 		i++;
 	}
 	return (s);
