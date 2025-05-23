@@ -12,11 +12,18 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdint.h>
-# include <unistd.h>
+# include <stdlib.h> // malloc
+# include <stddef.h> // size_t
+# include <stdint.h> // SIZE_MAX for int overload in calloc
+# include <unistd.h> // write function
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+//Mandatory Functions
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -51,4 +58,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
+//Bonus Functions
+
 #endif
