@@ -21,10 +21,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	i = 0;
 	if (!big && !len)
 		return (NULL);
-	if (big[0] == '\0')
-		return (NULL);
 	if (little[0] == '\0')
 		return ((char *)big);
+	if (len > ft_strlen(big))
+		len = ft_strlen(big);
 	while (i < len)
 	{
 		j = 0;
@@ -39,6 +39,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
+/*
 int main(void)
 {
 	#include <stdio.h>
@@ -53,3 +54,4 @@ int main(void)
 	printf("%s\n", test2);
 	printf("%s\n", test3);
 }
+*/
