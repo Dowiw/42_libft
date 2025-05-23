@@ -21,6 +21,10 @@ C_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	 ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 	 ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
+BONUS_FILES =
+
+O_BONUS = $(BONUS_FILES:.c=.o)
+
 O_FILES = $(C_FILES:.c=.o)
 
 all: $(NAME)
@@ -28,6 +32,10 @@ all: $(NAME)
 $(NAME):
 	gcc -Wall -Werror -Wextra -c $(C_FILES)
 	ar rcs $(NAME) $(O_FILES)
+
+bonus:
+	gcc -Wall -Werror -Wextra -c $(C_FILES) $(BONUS_FILES)
+	ar rcs $(NAME) $(O_FILES) $(O_BONUS)
 
 clean:
 	rm -f $(O_FILES)
