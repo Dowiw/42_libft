@@ -48,9 +48,10 @@ static char	*dup_str(const char *start, const char *end)
 //Helper function to fill array
 static int	fill_array(char **out, const char *s, char c)
 {
-	const char *start;
-	size_t	i;
+	size_t		i;
+	const char	*start;
 
+	i = 0;
 	while (*s)
 	{
 		while (*s == c)
@@ -78,24 +79,21 @@ static int	fill_array(char **out, const char *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**out;
-	char	*start;
-	size_t	i;
-	size_t	word_len;
 
 	if (!s)
 		return (NULL);
 	out = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!out)
 		return (NULL);
-	if(!fill_array(out, s, c))
+	if (!fill_array(out, s, c))
 	{
 		free(out);
 		return (NULL);
 	}
-	out[i] = NULL;
 	return (out);
 }
 
+/*
 int main(void)
 {
 	#include <stdio.h>
@@ -104,6 +102,9 @@ int main(void)
 	for (int i = 0; i < 3; i++)
 	{
 		printf("%s\n", test_out[i]);
+		free(test_out[i]);
 	}
 	free(test_out);
+	return (0);
 }
+*/
