@@ -15,7 +15,7 @@
 //Find char c in string s: return last found address, NULL otherwise
 char	*ft_strrchr(const char *s, int c)
 {
-	char *out;
+	char	*out;
 
 	out = NULL;
 	while (*s)
