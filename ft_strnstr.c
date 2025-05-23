@@ -21,6 +21,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	i = 0;
 	if (!big && !len)
 		return (NULL);
+	if (big[0] == '\0')
+		return (NULL);
 	if (little[0] == '\0')
 		return ((char *)big);
 	while (i < len)
@@ -35,4 +37,19 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		i++;
 	}
 	return (NULL);
+}
+
+int main(void)
+{
+	#include <stdio.h>
+	#include <bsd/string.h>
+	char *test = ft_strnstr("", "aaaaa", -1);
+	char *test1 = strnstr("", "aaaaa", -1);
+	printf("%s\n", test);
+	printf("%s\n", test1);
+
+	char *test2 = ft_strnstr("", "", 0);
+	char *test3 = strnstr("", "", 0);
+	printf("%s\n", test2);
+	printf("%s\n", test3);
 }
