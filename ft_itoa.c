@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+// #include <stdio.h>
 
 //Helper function that counters the number of digits in n
 static size_t	digit_counter(long long nmbr)
@@ -37,15 +38,16 @@ static size_t	digit_counter(long long nmbr)
 char	*ft_itoa(int n)
 {
 	char		*out;
-	size_t		i_out;
+	size_t		len;
+	size_t		i;
 	long long	nmbr;
 
-	i_out = digit_counter(n);
 	nmbr = (long long)n;
-	out = malloc(sizeof(char) * (i_out + 1));
+	len = digit_counter(nmbr);
+	out = malloc(sizeof(char) * (len + 1));
 	if (!out)
 		return (NULL);
-	out[i_out] = '\0';
+	out[len] = '\0';
 	if (nmbr == 0)
 		out[0] = '0';
 	if (nmbr < 0)
@@ -53,12 +55,11 @@ char	*ft_itoa(int n)
 		out[0] = '-';
 		nmbr = -nmbr;
 	}
-	i_out = digit_counter(n) - 1;
+	i = len - 1;
 	while (nmbr != 0)
 	{
-		out[i_out] = (nmbr % 10) + '0';
+		out[i--] = (nmbr % 10) + '0';
 		nmbr /= 10;
-		i_out--;
 	}
 	return (out);
 }
