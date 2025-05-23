@@ -13,64 +13,97 @@
 #include "libft.h"
 
 //Helper function that helps count number of strings in s
-static size_t	string_counter(char const *s, char c)
+static size_t	count_str(char const *s, char c)
 {
 	size_t	out;
 
-	out = 1;
+	out = 0;
 	while (*s)
 	{
-		if (*s == c)
+		while (*s == c)
+			s++;
+		if (*s)
 			out++;
-		s++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (out);
 }
 
 //Helper function that puts string into out[i] from its index start to its end
-static void	put_str(char **out, size_t i, const char *start, const char *end)
+static char	*dup_str(const char *start, const char *end)
 {
+	char	*string;
 	size_t	len;
 
-	len = (size_t)(end - start);
-	out[i] = malloc(len + 1);
-	if (!out)
+	len = (size_t)end - (size_t)start;
+	string = malloc(sizeof(char) * (len + 1));
+	if (!string)
 		return (NULL);
-	ft_memcpy(out[i], start, len);
-	out[i][len] = '\0';
+	ft_memcpy(string, start, len);
+	string[len] = '\0';
+	return (string);
 }
 
-//Splits str s into an array of strings based on delimiter c
+//Helper function to fill array
+static int	fill_array(char **out, const char *s, char c)
+{
+	const char *start;
+	size_t	i;
+
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			start = s;
+			while (*s && *s != c)
+				s++;
+			out[i] = dup_str(start, s);
+			if (!out[i])
+			{
+				while (i--)
+					free(out[i]);
+				return (0);
+			}
+			i++;
+		}
+	}
+	out[i] = NULL;
+	return (1);
+}
+
+//Splits str s into a mallocated array of strings based on delimiter c
 char	**ft_split(char const *s, char c)
 {
 	char	**out;
 	char	*start;
-	size_t	traverse_s;
-	size_t	count;
-	size_t	i_out;
+	size_t	i;
+	size_t	word_len;
 
 	if (!s)
 		return (NULL);
-	count = string_counter(s, c);
-	out = malloc(sizeof(char *) * (count + 1));
+	out = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!out)
 		return (NULL);
-	i_out = 0;
-	start = s;
-	while (*s)
+	if(!fill_array(out, s, c))
 	{
-		if (*s == c)
-		{
-			traverse_s = s - start;
-			put_str(out, i_out++, start, traverse_s);
-			s++;
-			start = s;
-		}
-		else
-			s++;
+		free(out);
+		return (NULL);
 	}
-	traverse_s = s - start;
-	put_str(out, i_out++, start, traverse_s);
-	out[i_out] = NULL;
+	out[i] = NULL;
 	return (out);
+}
+
+int main(void)
+{
+	#include <stdio.h>
+	char *test = "Hello,Hi,Hello";
+	char **test_out = ft_split(test, ',');
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%s\n", test_out[i]);
+	}
+	free(test_out);
 }
