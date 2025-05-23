@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 15:59:05 by kmonjard          #+#    #+#             */
-/*   Updated: 2025/05/14 16:05:06 by kmonjard         ###   ########.fr       */
+/*   Created: 2025/05/16 08:17:33 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/16 08:17:34 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Find char c in string s: return address if found, NULL otherwise
+//Find char c in string s: return first found address, NULL otherwise
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
