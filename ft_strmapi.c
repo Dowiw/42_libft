@@ -19,6 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	unsigned int	s_len;
 
+	if (!s || !f)
+		return (NULL);
 	s_len = ft_strlen(s);
 	out = malloc(sizeof(char) * (s_len + 1));
 	if (!out)
@@ -26,9 +28,25 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	while (i < s_len)
 	{
-		out[i] = f(i, s[i]);
+		out[i] = (*f)(i, s[i]);
 		i++;
 	}
 	out[i] = '\0';
 	return (out);
 }
+
+/*
+char test_f(unsigned int i, char c)
+{
+	return (c + i);
+}
+
+int main(void)
+{
+	#include <stdio.h>
+	char *test = ft_strmapi("abcdef", test_f);
+	printf("%s\n", test);
+	free(test);
+	return (0);
+}
+*/
