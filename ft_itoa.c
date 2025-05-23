@@ -40,11 +40,12 @@ char	*ft_itoa(int n)
 	size_t		i_out;
 	long long	nmbr;
 
+	i_out = digit_counter(n);
 	nmbr = (long long)n;
-	out = malloc(sizeof(char) * (digit_counter(n)));
+	out = malloc(sizeof(char) * (i_out + 1));
 	if (!out)
 		return (NULL);
-	out[digit_counter(n)] = '\0';
+	out[i_out] = '\0';
 	if (nmbr == 0)
 		out[0] = '0';
 	if (nmbr < 0)
