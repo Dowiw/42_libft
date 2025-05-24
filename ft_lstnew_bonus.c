@@ -24,3 +24,14 @@ t_list	*ft_lstnew(void *content)
 	out->next = NULL;
 	return (out);
 }
+
+/*
+int main(void)
+{
+	#include <stdio.h>
+	t_list *new = ft_lstnew("Hello");
+	printf("%s\n", (char *)new->content);
+	free(new);
+	return (0);
+}
+*/
