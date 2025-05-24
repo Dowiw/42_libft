@@ -37,24 +37,24 @@ with malloc:
 - ft_strdup done
 
 # ADDITIONAL FUNCTIONS
-- ft_substr
-- ft_strjoin
-- ft_strtrim
-- ft_split
-- ft_itoa
-- ft_strmapi
-- ft_striteri
-- ft_putchar_fd
-- ft_putstr_fd
-- ft_putendl_fd
-- ft_putnbr_fd
+- ft_substr done
+- ft_strjoin done
+- ft_strtrim done
+- ft_split done
+- ft_itoa done
+- ft_strmapi done
+- ft_striteri done
+- ft_putchar_fd done
+- ft_putstr_fd done
+- ft_putendl_fd done
+- ft_putnbr_fd done
 
 # BONUSES
-- ft_lstnew
-- ft_lstadd_front
-- ft_lstsize
-- ft_lstadd_back
-- ft_lstdelone
+- ft_lstnew done
+- ft_lstadd_front done
+- ft_lstsize done
+- ft_lstadd_back done
+- ft_lstdelone done
 - ft_lstclear
 - ft_lstiter
 - ft_lstmap
