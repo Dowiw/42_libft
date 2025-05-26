@@ -55,6 +55,6 @@ with malloc:
 - ft_lstsize done
 - ft_lstadd_back done
 - ft_lstdelone done
-- ft_lstclear
-- ft_lstiter
-- ft_lstmap
+- ft_lstclear done
+- ft_lstiter done
+- ft_lstmap done
